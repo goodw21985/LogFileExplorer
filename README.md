@@ -24,8 +24,8 @@ $a = ab* \| cd* |  Creates a variable with the match
 F  $a 3F4ax     |  Finds entries matching both $a variable and number 3F4aX                    
 K  a*           |  Lists all keys beginning with the string 'a'                                
 K  \*dog\*        |  Lists all keys containing dog                                               
-K  52F00-55000  |  Shows each unique address found in the logs within the specified range.     
-K  52xxx        |  Shows each unique address found in the logs within the specified range.     
+K  52F00-55000  |  Shows each unique number found in the logs within the specified range.     
+K  52xxx        |  Shows each unique number found in the logs within the specified range.     
 M  50           |  Show at most 50 items.                                                      
 V  $a           |  Shows all variables starting with $a                                        
 V               |  Shows all variables                                                         
