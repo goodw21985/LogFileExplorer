@@ -55,7 +55,7 @@ scans and indexes the file, and then lets you find things from a command prompt.
             logFile = new LogEntries(logFilename, index);
             if (logFile.Valid)
             {
-                ui = new LogScan.UI(logFile, index, outputLogFilename, persistentVariablesFilename);
+                ui = new UI(logFile, index, outputLogFilename, persistentVariablesFilename);
                 ui.Main();
             }
         }
