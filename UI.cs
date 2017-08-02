@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
-namespace LogFileExplorer
+namespace Common
 {
     /// <summary>
     /// manages all communication with the user
@@ -15,7 +15,7 @@ namespace LogFileExplorer
         /// <summary>
         /// All the entries in the log file
         /// </summary>
-        LogEntries log;
+        LogEntries logEntries;
 
         /// <summary>
         /// The inverted index of the log file
@@ -56,47 +56,53 @@ namespace LogFileExplorer
         /// <summary>
         /// UI constructor
         /// </summary>
-        /// <param name="logFilePath">file path to log file</param>
+        /// <param name="logEntries">file path to log file</param>
         /// <param name="index">The inverted index of the log file</param>
         /// <param name="outLogFilePath">The file path to the optional output log</param>
         /// <param name="persistentFileName">The file path to the variable persistence</param>
-        public UI(LogEntries logFilePath, InvertedIndex index, string outLogFilePath = "", string persistentFileName="LogVariables.tsv")
+        public UI(LogEntries logEntries, InvertedIndex index, string outLogFilePath = null, string persistentFileName="LogVariables.tsv")
         {
             logic = new Expressions(index, persistentFileName);
+            this.logEntries = logEntries;
+            this.index = index;
 
-            if (outLogFilePath != "")
+            if (outLogFilePath != null)
             {
-                string[] parts = outLogFilePath.Split('.');
-                outLogLeft = parts[0];
-                if (parts.Count() == 2)
-                {
-                    outLogRight = "."+parts[1];
-                }
-
-                this.log = logFilePath;
-                this.index = index;
-                for (int v = 0; uiLogOutput == null && v < 5; v++)
-                {
-                    if (v == 0)
-                    {
-                        outLogFilename = outLogLeft + outLogRight;
-                    }
-                    else
-                    {
-                        outLogFilename = outLogLeft + v + outLogRight;
-                    }
-                    try
-                    {
-                        uiLogOutput = new StreamWriter(outLogFilename);
-                    }
-                    catch { }
-                }
-
-                if (uiLogOutput != null)
-                {
-                    Console.WriteLine("Writing Console Output to file '{0}'", outLogFilename);
-                }
+                SetOutputLog(outLogFilePath);
             }
+        }
+
+        void SetOutputLog(string outLogFilePath)
+        {
+            string[] parts = outLogFilePath.Split('.');
+            outLogLeft = parts[0];
+            if (parts.Count() == 2)
+            {
+                outLogRight = "." + parts[1];
+            }
+
+            for (int v = 0; uiLogOutput == null && v < 5; v++)
+            {
+                if (v == 0)
+                {
+                    outLogFilename = outLogLeft + outLogRight;
+                }
+                else
+                {
+                    outLogFilename = outLogLeft + v + outLogRight;
+                }
+                try
+                {
+                    uiLogOutput = new StreamWriter(outLogFilename);
+                }
+                catch { }
+            }
+
+            if (uiLogOutput != null)
+            {
+                Console.WriteLine("Writing Console Output to file '{0}'", outLogFilename);
+            }
+
         }
 
         /// <summary>
@@ -109,7 +115,7 @@ namespace LogFileExplorer
             Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (EntryId v in m)
             {
-                string item = log[v];
+                string item = logEntries[v];
                 if (outCount++ < maxLinesToConsole)
                     Console.WriteLine(item);
                 if (uiLogOutput != null) uiLogOutput.WriteLine(item);
@@ -187,57 +193,10 @@ namespace LogFileExplorer
         }
 
         /// <summary>
-        /// Parses a command line into tokens.  
-        /// '=', '(', ')', '|', '&' tokens
-        /// other token (separated by space or delimiter)
-        /// always lower case
-        /// </summary>
-        /// <param name="command">string from command line</param>
-        /// <returns>list of tokens</returns>
-        public List<string> ParseCommand(string command)
-        {
-            List<string> tokens = new List<string>();
-            string currentToken = null;
-            for (int i = 0; i < command.Length; i++)
-            {
-                char c = command[i];
-                if (c >= 'A' && c <= 'Z')
-                {
-                    c = (char)(c + 'a' - 'A');
-                }
-                if (c <= ' ')
-                {
-                    currentToken = null;
-                }
-                else if (c == '(' | c == ')' || c == '|' || c == '&' || c == '=')
-                {
-                    currentToken = null;
-                    tokens.Add("" + c);
-                }
-                else
-                {
-                    if (currentToken == null)
-                    {
-                        currentToken = "" + c;
-                        tokens.Add(currentToken);
-                    }
-                    else
-                    {
-                        currentToken += c;
-                        tokens[tokens.Count()-1]=currentToken;
-                    }
-                }
-            }
-
-            return tokens;
-        }
-
-        /// <summary>
         /// Main UI loop
         /// </summary>
         public void Main()
         {
-
             for (;;)
             {
                 outCount = 0;
@@ -248,8 +207,9 @@ namespace LogFileExplorer
                     try
                     {
                         command = command.Trim().Replace("  ", " ");
-                        uiLogOutput.WriteLine("> {0}", command);
-                        List<string> parts = ParseCommand(command);
+                        if (uiLogOutput!=null)
+                            uiLogOutput.WriteLine("> {0}", command);
+                        List<string> parts = Common.Expressions.ParseCommand(command);
                         if (parts.Count == 0) continue;
                         if (parts.Count >= 2 && parts[0].StartsWith("$") && parts[1] == "=")
                         {
@@ -283,6 +243,10 @@ namespace LogFileExplorer
                                     Variables(parts);
                                     break;
 
+                                case "l":
+                                    Log(parts);
+                                    break;
+
                                 default:
                                     HelpMessage();
                                     break;
@@ -294,7 +258,8 @@ namespace LogFileExplorer
                             WriteLineRed(errorMessage);
                         }
 
-                        uiLogOutput.Flush();
+                        if (uiLogOutput != null)
+                            uiLogOutput.Flush();
                     }
                     catch (Exception exception)
                     {
@@ -304,11 +269,26 @@ namespace LogFileExplorer
                         Console.WriteLine(exception.StackTrace);
                         Console.ForegroundColor = ConsoleColor.White;
                     }
-
                 }
             }
         }
 
+        /// <summary>
+        /// Log command method.  opens an output log file.
+        /// </summary>
+        /// <param name="commandTokens">the tokens from the user command</param>
+        void Log(List<string> commandTokens)
+        {
+            if (commandTokens.Count() == 1)
+            {
+                SetOutputLog("outputlog.txt");
+            }
+            else
+            {
+                SetOutputLog(commandTokens[1]);
+            }
+        }
+        
         /// <summary>
         /// Variable command method.  Prints all $xxx variables that start with a given prefix
         /// </summary>
@@ -386,7 +366,7 @@ namespace LogFileExplorer
         /// <param name="commandTokens"></param>
         void Find(List<string> commandTokens)
         {
-            MatchSet m = logic.Parse(commandTokens, errorMessages, 1);
+            MatchSet m = logic.ParseTokens(commandTokens, errorMessages, 1);
             WriteLineResults(m, string.Join(" ",commandTokens));
         }
 
@@ -414,6 +394,8 @@ k 52xxx         Shows each unique address found in the logs within the specified
 m 50            Show at most 50 items.
 v $a            Shows all variables starting with $a
 v               Shows all variables
+l               Turns on output logging of UI to a file
+l xxx.txt       Turns on logging to this file
 ");
 
         }

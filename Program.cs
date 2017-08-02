@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.IO;
 using static System.Diagnostics.Debugger;
 
-namespace LogFileExplorer
+namespace Common
 {
     class Program
     {
@@ -15,7 +15,7 @@ namespace LogFileExplorer
         static string logFilename = @"runlog.csv";
 
         // everything you see also goes to this file
-        const string outputLogFilename = "ScanLog.txt";
+        const string outputLogFilename = null; //"ScanLog.txt";
 
         // And variables used in a session a persisted to this file
         const string persistentVariablesFilename = "LogVariables.tsv";
@@ -55,6 +55,9 @@ scans and indexes the file, and then lets you find things from a command prompt.
             logFile = new LogEntries(logFilename, index);
             if (logFile.Valid)
             {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Read {0} lines from file {1}", logFile.Count, logFilename);
+                Console.ForegroundColor = ConsoleColor.White;
                 ui = new UI(logFile, index, outputLogFilename, persistentVariablesFilename);
                 ui.Main();
             }
