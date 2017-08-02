@@ -1,0 +1,9 @@
+E:\github\LogScan\bin\Debug\LogScan.exe.config
+E:\github\LogScan\bin\Debug\LogScan.exe
+E:\github\LogScan\bin\Debug\LogScan.pdb
+E:\github\LogScan\obj\Debug\LogScan.csprojResolveAssemblyReference.cache
+E:\github\LogScan\obj\Debug\LogScan.exe
+E:\github\LogScan\obj\Debug\LogScan.pdb
+F:\NetFXDev1\src\NDP\clr\src\LogScan.exe.config
+F:\NetFXDev1\src\NDP\clr\src\LogScan.exe
+F:\NetFXDev1\src\NDP\clr\src\LogScan.pdb

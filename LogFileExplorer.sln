@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileSearch", "LogFileSearch.csproj", "{388F2C4A-472A-4FB9-A7F2-955B88D1C7CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileConsole", "LogFileConsole\LogFileConsole.csproj", "{388F2C4A-472A-4FB9-A7F2-955B88D1C7CC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F9B969F4-42AD-430A-8370-44D3ECDEAED3} = {F9B969F4-42AD-430A-8370-44D3ECDEAED3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileExplorer", "..\LogFileViewer\LogFileExplorer.csproj", "{1A9CFC45-AE5A-4835-B34D-0354C57D25F5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileExplorer", "LogFileExplorer\LogFileExplorer.csproj", "{1A9CFC45-AE5A-4835-B34D-0354C57D25F5}"
 	ProjectSection(ProjectDependencies) = postProject
 		{F9B969F4-42AD-430A-8370-44D3ECDEAED3} = {F9B969F4-42AD-430A-8370-44D3ECDEAED3}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{F9B969F4-42AD-430A-8370-44D3ECDEAED3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{F9B969F4-42AD-430A-8370-44D3ECDEAED3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

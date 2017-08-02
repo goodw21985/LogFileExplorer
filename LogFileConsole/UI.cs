@@ -110,7 +110,7 @@ namespace Common
         /// </summary>
         /// <param name="m">The match set</param>
         /// <param name="what">the original command, in case an error message is created</param>
-        public void WriteLineResults(MatchSet m, string what)
+        public void WriteLineResults(IMatchSet m, string what)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
             foreach (EntryId v in m)
@@ -366,7 +366,7 @@ namespace Common
         /// <param name="commandTokens"></param>
         void Find(List<string> commandTokens)
         {
-            MatchSet m = logic.ParseTokens(commandTokens, errorMessages, 1);
+            IMatchSet m = logic.ParseTokens(commandTokens, errorMessages, 1);
             WriteLineResults(m, string.Join(" ",commandTokens));
         }
 

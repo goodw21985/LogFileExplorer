@@ -1,0 +1,6 @@
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\Debug\LogFileExplorer.csprojResolveAssemblyReference.cache
+C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer.exe.config
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\Debug\LogFileExplorer.exe
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\Debug\LogFileExplorer.pdb
+C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer.exe
+C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer.pdb

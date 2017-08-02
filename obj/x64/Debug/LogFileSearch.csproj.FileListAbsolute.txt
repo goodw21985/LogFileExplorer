@@ -1,0 +1,8 @@
+C:\Users\bobgood\Source\git\LogFileExplorer\bin\x64\Debug\LogFileExplorer.exe.config
+C:\Users\bobgood\Source\git\LogFileExplorer\bin\x64\Debug\LogFileExplorer.exe
+C:\Users\bobgood\Source\git\LogFileExplorer\bin\x64\Debug\LogFileExplorer.pdb
+C:\Users\bobgood\Source\git\LogFileExplorer\bin\x64\Debug\Common.dll
+C:\Users\bobgood\Source\git\LogFileExplorer\bin\x64\Debug\Common.pdb
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\x64\Debug\LogFileSearch.csprojResolveAssemblyReference.cache
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\x64\Debug\LogFileExplorer.exe
+C:\Users\bobgood\Source\git\LogFileExplorer\obj\x64\Debug\LogFileExplorer.pdb
