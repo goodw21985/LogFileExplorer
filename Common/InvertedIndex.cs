@@ -258,7 +258,27 @@ namespace Common
         {
             if (token.Contains(stringWildcardChar))
             {
-                return GetWildcardStringKeys(token, errors);
+                if (token.StartsWith("*"))
+                {
+                    if (token.EndsWith("*"))
+                    {
+                        return GetWildcardStringKeys(token, errors);
+                    } else
+                    {
+                        return GetWildcardStringKeys(token+"*", errors);
+                    }
+                }
+                else
+                {
+                    if (token.EndsWith("*"))
+                    {
+                        return GetWildcardStringKeys("*"+token, errors);
+                    }
+                    else
+                    {
+                        return GetWildcardStringKeys("*"+token + "*", errors);
+                    }
+                }
             }
             else
             {

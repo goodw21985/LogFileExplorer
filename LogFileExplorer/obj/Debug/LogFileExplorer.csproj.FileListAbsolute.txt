@@ -34,7 +34,6 @@ C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\bin\x64\Debug\LogFil
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\bin\x64\Debug\LogFileExplorer.pdb
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\bin\x64\Debug\Common.dll
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\bin\x64\Debug\Common.pdb
-C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\bin\x64\Debug\LogFileViewer.pdb
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\obj\Debug\LogFileExplorer.csprojResolveAssemblyReference.cache
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\obj\Debug\MainWindow.g.cs
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileExplorer\obj\Debug\App.g.cs

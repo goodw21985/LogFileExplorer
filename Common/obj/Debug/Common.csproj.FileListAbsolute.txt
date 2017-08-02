@@ -5,6 +5,5 @@ C:\Users\bobgood\Source\git\Common\obj\Debug\Common.dll
 C:\Users\bobgood\Source\git\Common\obj\Debug\Common.pdb
 C:\Users\bobgood\Source\git\LogFileExplorer\Common\bin\Debug\Common.dll
 C:\Users\bobgood\Source\git\LogFileExplorer\Common\bin\Debug\Common.pdb
-C:\Users\bobgood\Source\git\LogFileExplorer\Common\obj\Debug\Common.csprojResolveAssemblyReference.cache
 C:\Users\bobgood\Source\git\LogFileExplorer\Common\obj\Debug\Common.dll
 C:\Users\bobgood\Source\git\LogFileExplorer\Common\obj\Debug\Common.pdb
