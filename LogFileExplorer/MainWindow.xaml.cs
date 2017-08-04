@@ -37,7 +37,10 @@ namespace LogFileViewer
         /// </summary>
         Expressions logic;
 
-   // PersistentVariableStore variables;
+        ComboBox[] commandBox1;
+        ComboBox[] commandBox2;
+        ListBox[] logListBox;
+        // PersistentVariableStore variables;
 
         string logFilename = @"C:\Users\bobgood\Downloads\runlog.csv";
         string persistentFileName = "psv.tsv";
@@ -46,6 +49,9 @@ namespace LogFileViewer
         public MainWindow()
         {
             InitializeComponent();
+            commandBox1 = new ComboBox[] { commandBox1a, commandBox1b, commandBox1c, commandBox1d, commandBox1e };
+            commandBox2 = new ComboBox[] { commandBox2a, commandBox2b, commandBox2c, commandBox2d, commandBox2e };
+            logListBox = new ListBox[] { logListBox1, logListBox2, logListBox3, logListBox4, logListBox5 };
         }
         event EventHandler<LoadEventArgs> ProgressUpdate;
 
@@ -88,15 +94,17 @@ new DoWorkEventHandler(bw_DoWork);
         private bool firstLoad = true;
         private void ProgressChanged(object sender, LoadEventArgs e)
         {
+            int n = 0;
+            var listbox = logListBox[n];
             if (e.line_number > 0)
                 statusline1.Content = "" + e.line_number;
 
             if (firstLoad)
             {
-                logListBox.Items.Clear();
+                listbox.Items.Clear();
                 for (int i=0; i< e.line_number;i++)
                 {
-                    logListBox.Items.Add(logEntries[new Common.EntryId(i)]);
+                    listbox.Items.Add(logEntries[new Common.EntryId(i)]);
                 }
             }
             firstLoad = false;
@@ -105,32 +113,34 @@ new DoWorkEventHandler(bw_DoWork);
         private List<int> sortedContent = null;
         private void CommandComplete(object sender, CommandEventArgs e)
         {
-            this.logListBox.Items.Clear();
+            int n = e.paneIndex;
+            var listbox = this.logListBox[n];
+           listbox.Items.Clear();
             if (e.errorMessages.Count()>0)
             {
-                logListBox.Items.Add(e.command);
-                logListBox.Items.Add("");
+                listbox.Items.Add(e.command);
+                listbox.Items.Add("");
                 foreach (string s in e.errorMessages)
                 {
-                    logListBox.Items.Add(s);
+                    listbox.Items.Add(s);
                 }
 
-                logListBox.Foreground = Brushes.Red;
+                listbox.Foreground = Brushes.Red;
                 return;
             }
 
             if (e.matchSet.Count()==0)
             {
-                logListBox.Items.Add(e.command);
-                logListBox.Items.Add("");
-                logListBox.Items.Add("no matches found");
+                listbox.Items.Add(e.command);
+                listbox.Items.Add("");
+                listbox.Items.Add("no matches found");
 
-                logListBox.Foreground = Brushes.Red;
+                listbox.Foreground = Brushes.Red;
                 return;
 
             }
 
-            logListBox.Foreground = Brushes.Black;
+            listbox.Foreground = Brushes.Black;
 
             IMatchSet m = e.matchSet;
             this.sortedContent = null;
@@ -147,7 +157,7 @@ new DoWorkEventHandler(bw_DoWork);
             {
                 if (i < max)
                 {
-                    logListBox.Items.Add(logEntries[new Common.EntryId(sortedList[i])]);
+                    listbox.Items.Add(logEntries[new Common.EntryId(sortedList[i])]);
                 }
             }
 
@@ -157,16 +167,16 @@ new DoWorkEventHandler(bw_DoWork);
             {
                 moreContentButton.Visibility = System.Windows.Visibility.Visible;
                 sortedContent = sortedList;
-                logListBox.Items.Add("");
-                logListBox.Items.Add("  - press More Content button to see more -");
+                listbox.Items.Add("");
+                listbox.Items.Add("  - press More Content button to see more -");
                 statusline1.Content = string.Format("{0} of {1} out of {2}",
-        logListBox.Items.Count-2, sortedList.Count(), logEntries.Count);
+        listbox.Items.Count-2, sortedList.Count(), logEntries.Count);
                 statusline2.Content = "";
             }
             else
             {
                 statusline1.Content = string.Format("{0} out of {1}",
-logListBox.Items.Count, logEntries.Count);
+listbox.Items.Count, logEntries.Count);
 
             }
         }
@@ -183,10 +193,10 @@ logListBox.Items.Count, logEntries.Count);
             }
         }
         
-        private void LogEnter()
+        private void LogEnter(int paneIndex)
         {
-            string a = commandBox1.Text;
-            string b = commandBox2.Text;
+            string a = commandBox1[paneIndex].Text;
+            string b = commandBox2[paneIndex].Text;
             string command = a;
             if (a == "") command = b;
             else if (b != "") command = command + " , " + b;
@@ -199,6 +209,7 @@ logListBox.Items.Count, logEntries.Count);
                IMatchSet m= logic.ParseTokens(tokens, errorMessages, 0);
                CommandUpdate(this, new LogFileViewer.CommandEventArgs()
                {
+                   paneIndex = paneIndex,
                     matchSet = m,
                     errorMessages = errorMessages,
                     command = string.Join(" ", tokens)
@@ -208,22 +219,33 @@ logListBox.Items.Count, logEntries.Count);
            });
         }
 
+        int GetPaneIndex(object sender, ComboBox[] list)
+        {
+            for (int cnt = 0; cnt < list.Count(); cnt++)
+            {
+                if (list[cnt] == sender) return cnt;
+            }
+            return -1;
+        }
+
         private void commandBox1_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            int paneIndex = GetPaneIndex(sender, commandBox1);
             ComboBox c = sender as ComboBox;
             if (e.Text[0]<' ')
             {
                 e.Handled = true;
-                LogEnter();
+                LogEnter(paneIndex);
             }
         }
 
         private void commandBox2_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+            int paneIndex = GetPaneIndex(sender, commandBox2);
             if (e.Text[0] < ' ')
             {
                 e.Handled = true;
-                LogEnter();
+                LogEnter(paneIndex);
             }
         }
 
@@ -234,22 +256,24 @@ logListBox.Items.Count, logEntries.Count);
 
         private void AddMoreContent(object sender, RoutedEventArgs e)
         {
-            var cnt=logListBox.Items.Count;
+            var n = 0;
+            var listbox = logListBox[n];
+            var cnt=listbox.Items.Count;
             if (sortedContent == null) return;
             int ocnt = sortedContent.Count;
             if (ocnt > cnt-2)
             {
-                logListBox.Items.RemoveAt(--cnt);
-                logListBox.Items.RemoveAt(--cnt);
+                listbox.Items.RemoveAt(--cnt);
+                listbox.Items.RemoveAt(--cnt);
             }
 
 
             for (int i = cnt; i < ocnt && i < 2 * cnt; i++)
             {
-                logListBox.Items.Add(logEntries[new Common.EntryId(sortedContent[i])]);
+                listbox.Items.Add(logEntries[new Common.EntryId(sortedContent[i])]);
             }
 
-            var acnt = logListBox.Items.Count;
+            var acnt = listbox.Items.Count;
             if (acnt>=ocnt)
             {
                 moreContentButton.Visibility = System.Windows.Visibility.Hidden;
@@ -266,5 +290,6 @@ logListBox.Items.Count, logEntries.Count);
         public Common.IMatchSet matchSet;
         public List<string> errorMessages;
         public string command;
+        public int paneIndex;
     }
 }

@@ -9,15 +9,20 @@
         Title="MainWindow" Height="500" Width="1024">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition MinWidth="100" Width="5*"/>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="25"/>
         </Grid.RowDefinitions>
+
+
         <Grid  Grid.Column="1" Grid.Row="0" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="40"/>
@@ -29,8 +34,8 @@
             </Grid.RowDefinitions>
             <Button Background="AliceBlue" Grid.Column="0" Grid.Row="0">Do this</Button>
             <Button Background="AliceBlue" Grid.Column="0" Grid.Row="1">Do that</Button>
-            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
-            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1a" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2a" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
 
         </Grid>
         <TabControl Grid.Column="1" Grid.Row="1" >
@@ -42,7 +47,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="logListBox" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ListBox x:Name="logListBox1" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
                 </Grid>
 
             </TabItem>
@@ -86,11 +91,313 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <ListBox x:Name="logList" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
+                    <ListBox x:Name="historyList1" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
                 </Grid>
 
             </TabItem>
         </TabControl>
+
+
+
+        <Grid  Grid.Column="2" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="0">Do this</Button>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="1">Do that</Button>
+            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1b" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2b" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
+
+        </Grid>
+        <TabControl Grid.Column="2" Grid.Row="1" >
+            <TabItem Header="Log Entries" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="logListBox2" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Keys" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Variables" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="History" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="433*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="historyList2" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+
+        <Grid  Grid.Column="3" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="0">Do this</Button>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="1">Do that</Button>
+            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1c" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2c" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
+
+        </Grid>
+        <TabControl Grid.Column="3" Grid.Row="1" >
+            <TabItem Header="Log Entries" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="logListBox3" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Keys" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Variables" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="History" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="433*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="historyList3" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+
+        <Grid  Grid.Column="4" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="0">Do this</Button>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="1">Do that</Button>
+            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1d" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2d" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
+
+        </Grid>
+        <TabControl Grid.Column="4" Grid.Row="1" >
+            <TabItem Header="Log Entries" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="logListBox4" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Keys" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Variables" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="History" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="433*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="historyList4" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
+
+        <Grid  Grid.Column="5" Grid.Row="0" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="0">Do this</Button>
+            <Button Background="AliceBlue" Grid.Column="0" Grid.Row="1">Do that</Button>
+            <ComboBox PreviewTextInput="commandBox1_PreviewTextInput"  x:Name="commandBox1e" IsEditable="True" Text="abc" Width="auto" Grid.Column="1" Grid.Row="0" SelectionChanged="commandBox1_SelectionChanged"/>
+            <ComboBox PreviewTextInput="commandBox2_PreviewTextInput"  x:Name="commandBox2e" IsEditable="True" Text="xyz" Width="auto" Grid.Column="1" Grid.Row="1"  SelectionChanged="commandBox1_SelectionChanged"/>
+
+        </Grid>
+        <TabControl Grid.Column="5" Grid.Row="1" >
+            <TabItem Header="Log Entries" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="logListBox5" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Keys" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Variables" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox Width="auto" Height="auto" Grid.Row="0" Grid.Column="0">Text here</ListBox>
+                    <ScrollBar Height="auto" Orientation="Vertical" Width="auto" Grid.Row="0" Grid.Column="1"/>
+                </Grid>
+
+            </TabItem>
+
+            <TabItem Header="History" >
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="433*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ListBox x:Name="historyList5" Width="auto" Height="auto" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="0,0,0.428,0.429">Text there</ListBox>
+                </Grid>
+
+            </TabItem>
+        </TabControl>
+
         <StackPanel Orientation ="Horizontal" Grid.Column="1" Grid.Row="2">
             <Button Visibility="Hidden" x:Name="moreContentButton" Click="AddMoreContent">Load More</Button>
             <Label Height="25" VerticalAlignment="Top" x:Name="statusline1">0 lines read</Label>

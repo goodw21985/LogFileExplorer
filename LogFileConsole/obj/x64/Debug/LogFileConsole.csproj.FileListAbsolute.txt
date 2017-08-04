@@ -6,3 +6,11 @@ C:\Users\bobgood\Source\git\LogFileExplorer\LogFileConsole\bin\x64\Debug\Common.
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.csprojResolveAssemblyReference.cache
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.exe
 C:\Users\bobgood\Source\git\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.pdb
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\bin\x64\Debug\LogFileConsole.exe.config
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\bin\x64\Debug\LogFileConsole.exe
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\bin\x64\Debug\LogFileConsole.pdb
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\bin\x64\Debug\Common.dll
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\bin\x64\Debug\Common.pdb
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.csprojResolveAssemblyReference.cache
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.exe
+C:\Users\bobgood.REDMOND\Source\github\LogFileExplorer\LogFileConsole\obj\x64\Debug\LogFileConsole.pdb
